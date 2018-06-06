@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+        <!-- 已知数组var arr = ["a","b","c","d","e","f","g","h","i","j","k","l"];
+
+        要求：点击按钮随机获取4位不重复的验证码，并写入文本框。点击一次获取一次。 -->
+    <form action="javascript:void(0);">
+        <input type="text" name="">
+        <button id="btn">获取验证码</button>
+    </form>
+
+    <script>
+        //声明变量
+        var ipt = document.getElementsByTagName("input"),
+            btn = document.getElementById("btn");
+        var arr = ["a","b","c","d","e","f","g","h","i","j","k","l"];
+
+        //封装一个函数
+        function fn(a){
+            var newArr = [];//定义一个空的数组，以方便放入满足条件的数组
+            for(var i = 0;i < 4;i++){//循环四次输出四个数组项
+                var index = Math.floor(Math.random() * arr.length);//获取下标
+                //判断是否重复
+                if(newArr.indexOf(arr[index]) == -1){
+                    newArr.push(arr[index]);//如果不重复则将数组项推入数组
+                }else{
+                    i--;//如果重复，将该数组项所占的空间抵消，在进行一次循环
+                }
+            }
+            return newArr.join("");//返回转换字符串
+        }
+        btn.onclick = function(){//点击并返回
+            ipt[0].value = fn(arr);//将得到的结果输出到文本框内
+        }
+    </script>
+</body>
+</html>

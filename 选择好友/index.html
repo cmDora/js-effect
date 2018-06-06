@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        #xuanzhong{height: 40px;}
+        #xuanzhong span{padding:0 10px;display:inline-block;height: 40px;line-height:40px;}
+        #box ul{width: 300px;}
+        #box ul li{list-style:none;float:left;width: 100px;height: 40px;line-height:40px;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="xuanzhong"></div>
+        <h3>请选择好友</h3>
+        <ul>
+
+        </ul>
+    </div>
+    <br clear="both">
+    <div id="chaxun">
+        <input type="text" id="txt">
+        <ul id="uls"></ul>
+    </div>
+    <script src="data.js"></script>
+    <script>
+        function Choose(arr){
+            this.arr = arr;
+            this.init();
+            this.renderToDom();
+        }
+        Choose.prototype = {
+            constructor:Choose,
+            init:function(){
+                this.xuanzhong = document.getElementById('xuanzhong');
+                this.box = document.getElementById('box');
+                this.uls = this.box.getElementsByTagName('ul')[0];
+            },
+            renderToDom:function(){
+                var str = '';
+                for(var i=0;i<this.arr.length;i++){
+                    str += `<li><input type="checkbox">${this.arr[i].name[0]}</li>`
+                }
+                this.uls.innerHTML = str;
+                this.bindIpt();
+            },
+            bindIpt:function(){
+                this.ipt = this.box.getElementsByTagName('input');
+                var that = this;
+                for(var i=0;i<this.ipt.length;i++){
+                    this.ipt[i].onclick = function(){
+                        that.sps = document.getElementsByTagName('span');
+                        if(this.checked){
+                            if(that.sps.length>=4){
+                                alert('选中的人数够了');
+                                this.checked = false;
+                            }else{
+                                var Osps = document.createElement('span');
+                                Osps.innerHTML = this.nextSibling.nodeValue+'x';
+                                that.xuanzhong.appendChild(Osps);
+                                that.bindSps();
+                            }
+                        }else{
+                            for(var i=0;i<that.sps.length;i++){
+                                if(this.nextSibling.nodeValue+'x' == that.sps[i].innerHTML){
+                                    that.xuanzhong.removeChild(that.sps[i])
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            bindSps:function(){
+                var that = this;
+                for(var i=0;i<this.sps.length;i++){
+                    this.sps[i].onclick = function(){
+                        that.xuanzhong.removeChild(this);
+                        for(var j=0;j<that.ipt.length;j++){
+                            if(that.ipt[j].nextSibling.nodeValue+'x' == this.innerHTML){
+                                that.ipt[j].checked = false;
+                            }
+                        }
+                    }
+                }
+            },
+
+        }
+        new Choose(data);
+
+        function Chaxun(arr){
+            this.arr = arr;
+            this.init();
+        }
+        Chaxun.prototype={
+            constructor:Chaxun,
+            init:function(){
+                this.chaxun = document.getElementById('chaxun');
+                this.txt = document.getElementById('txt');
+                this.uls = document.getElementById('uls');
+                this.keyup();
+            },
+            keyup:function(){
+                var that = this;
+                this.txt.onkeyup = function(){
+                    var val = that.txt.value;
+                    var str = '';
+                        if(that.txt.value != ''){
+                        for(var i=0;i<that.arr.length;i++){
+                            if(that.arr[i].name[0].indexOf(val) != -1 || that.arr[i].name[1].indexOf(val) != -1 || that.arr[i].name[2].indexOf(val) != -1){
+                                str += `<li>${that.arr[i].name[0]}</li>`;
+                            }
+                        }
+                        that.uls.innerHTML = str;
+                    }else{
+                        that.uls.innerHTML = '';
+                    }
+                }
+            }
+        }
+        new Chaxun(data);
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        .wrap{width: 200px;margin:50px auto;}
+        input{width: 200px;height: 40px;}
+        ul li{width: 200px;height: 40px;list-style:none;line-height:40px;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <input type="text">
+        <ul></ul>
+    </div>
+    <script>
+        var  texts=[
+                    {name:'@126.com'},
+                    {name:'@163.com'},
+                    {name:'@qq.com'},
+                    {name:'@vip.163.com'},
+                    {name:"@yeah.net"},
+                    {name:'@188.com'}
+                ]
+        function Email(){
+            this.init();
+            this.bindEvent();
+        }
+        Email.prototype = {
+            constructor:Email,
+            init:function(){
+                this.txt = document.getElementsByTagName('input')[0];
+                this.uls = document.getElementsByTagName('ul')[0];
+
+            },
+            bindEvent:function(){
+                this.textKey();
+            },
+            textKey:function(){
+                var that = this;
+                this.txt.onkeyup = function(){
+                    var val = that.txt.value;
+                    var index = val.indexOf('@');
+                    var before = val.slice(0,index);
+                    var after = val.slice(index+1);
+                    var str = '';
+                    if(val != ''){
+                        for(var i=0;i<texts.length;i++){
+                            if(index == -1){
+                                str += `<li>${val+texts[i].name}</li>`
+                            }else{
+                                if(texts[i].name.indexOf(after) != -1){
+                                    str += `<li>${before+texts[i].name}</li>`;
+                                }
+                            }
+                        }
+                    }else{
+                        that.uls.innerHTML = '';
+                    }
+                    that.uls.innerHTML = str;
+                    that.lis = document.getElementsByTagName('li');
+                    that.num=-1;
+                    that.keyup();
+                    that.over();
+                }
+
+            },
+            keyup:function(){
+                var that = this;
+                document.onkeyup = function(e){
+                    var e = window.event || e;
+                    switch(e.keyCode){
+                        case 38:
+                            that.txt.blur();
+                            that.num--;
+                            if(that.num<0)that.num=that.lis.length-1;
+                            that.change(that.num);
+                            break;
+                        case 40:
+                            that.txt.blur();
+                            that.num++;
+                            if(that.num>that.lis.length-1)that.num=0;
+                            that.change(that.num);
+                            break;
+                        case 13:
+                            that.txt.value = that.lis[that.num].innerHTML;
+                            that.uls.innerHTML = '';
+                            break;
+                    }
+                }
+            },
+            over:function(){
+                var that = this;
+                for(var i=0;this.lis.length;i++){
+                    this.lis[i].idx = i;
+                    this.lis[i].onmouseover = function(){
+                        that.change(this.idx);
+                        that.num = this.idx;
+                    }
+                    this.lis[i].onclick = function(){
+                        that.txt.value = that.lis[this.idx].innerHTML;
+                        that.uls.innerHTML = '';
+                    }
+                }
+            },
+            change:function(num){
+
+              for(var i=0;i<this.lis.length;i++){
+                this.lis[i].style.background = '';
+              }
+              this.lis[num].style.background = '#ccc';
+            }
+        }
+        new Email();
+
+    </script>
+</body>
+</html>

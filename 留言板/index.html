@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        #wrap{width: 800px;margin:50px auto;border:1px solid #000;padding:10px;padding-bottom:60px;}
+        #pic{display:inline-block;vertical-align:middle;}
+        #pic img{width: 80px;height: 80px;margin-left:10px;opacity:.3;}
+        #yu{display:block;margin-top:15px;width: 800px;height: 200px;}
+        button{width: 80px;height: 40px;border:0;background:limegreen;float: right;margin-top:15px;}
+        dl{border-bottom:1px solid #ccc;padding:10px;height: 100px;position:relative;}
+        dl img{width: 100px;height: 100px;margin-right:10px;}
+        dt{float: left;}
+        dd h2{padding-top:5px;color:skyblue;display:inline-block;font-size:16px;}
+        dd p{padding-top:20px;}
+        dd b{position:absolute;right:10px;top:15px;font-weight:normal;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <input type="text" id="txt">
+        <div id="pic">
+            <img src="images/2.jpeg" style='opacity: 1'><img src="images/1.jpeg"><img src="images/3.jpg"><img src="images/4.jpg"><img src="images/5.jpg"><img src="images/6.jpg">
+        </div>
+        <textarea id="yu"></textarea>
+        <button>广播</button>
+        <div style='clear: both;'></div>
+        <h1>大家在说</h1>
+        <div id="list">
+
+        </div>
+    </div>
+    <script>
+        var txt = document.getElementById('txt'),
+            pic = document.getElementById('pic'),
+            imgs = pic.getElementsByTagName('img'),
+            yu = document.getElementById('yu'),
+            btn = document.getElementsByTagName('button')[0],
+            list = document.getElementById('list');
+        for(var i=0;i<imgs.length;i++){
+            imgs[i].index = i;
+            imgs[i].onclick = function(){
+                for(var i=0;i<imgs.length;i++){
+                    imgs[i].style.opacity = '.3';
+                }
+                this.style.opacity = '1'
+                window.idx = this.index;
+            }
+        }
+        btn.onclick = function(){
+            var txtV = txt.value;
+            var yuV = yu.value;
+            var imgV = imgs[idx].src;
+            var oDl = document.createElement('dl');
+            oDl.innerHTML = `<dt><img src=${imgV}></dt><dd><h2>${txtV}:  </h2><span>${yuV}</span><p>${getTime()}</p><b>删除</b></dd>`;
+            list.insertBefore(oDl,list.firstElementChild);
+            var b = document.getElementsByTagName('b')[0];
+
+                b.onclick = function(){
+                    list.removeChild(this.parentNode.parentNode)
+                }
+
+            txt.value = '';
+            yu.value = '';
+            for(var i=0;i<imgs.length;i++){
+                imgs[i].style.opacity = '.3';
+            }
+            imgs[0].style.opacity = '1';
+            var dls = document.getElementsByTagName('dl');
+            for(var i=0;i<dls.length;i++){
+                dls[i].index = i;
+                dls[i].onmouseover = function(){
+                    for(var i=0;i<dls.length;i++){
+                        dls[i].style.background = '';
+                        b.style.display = 'none';
+                    }
+                    this.style.background = '#ccc';
+                    b.style.display = 'block';
+                }
+            }
+        }
+        function getTime(){
+            var data = new Date();
+            var year = data.getFullYear();
+            var month = data.getMonth()+1;
+            var day = data.getDate();
+            var hour = data.getHours();
+            var minutes = data.getMinutes();
+            var str = year+'/'+month+'/'+day+'/'+hour+'/'+minutes;
+            return str;
+        }
+    </script>
+</body>
+</html>

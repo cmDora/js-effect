@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<h1 id="hi"></h1>
+	<script>
+		//setInterval(fn,ms);
+
+		/*var i = 0;
+		setInterval(fn,1000);
+		function fn(){
+			i++;
+			var tit = "大厦将颠噶开始该地块桑代克隔开"
+			document.write(tit[i-1]);
+		}*/
+
+		setInterval(fn,1000);
+		var i = 0;
+		function fn(){
+
+			var tit = "所发生的护肤品";
+			var sum = tit.substr(0,i);
+			i++;
+
+			if(i > tit.length){
+				i=0;
+			}
+
+			var hi = document.getElementById("hi").innerHTML = sum;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        #box{width: 600px;height:auto;border:1px solid #000;margin:50px auto;}
+        img{width: 200px;height: 150px;}
+        dl dt{float:left;padding:10px;}
+        dl{height: 180px;}
+        dl dd{padding-top:30px;}
+        dl dd p{padding:10px;}
+    </style>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script src="hotel.json"></script>
+    <script>
+        var box = document.getElementById('box');
+        var str = '';
+        for(var k in obj){
+            for(var i=0;i<obj.result.hotel_list.length;i++){
+                str += `<dl>
+                <dt><img src="${obj.result.hotel_list[i].image}"></dt>
+                <dd>
+                    <p>${obj.result.hotel_list[i].name}</p>
+                    <p>${obj.result.hotel_list[i].addr}</p>
+                    <p>${obj.result.hotel_list[i].stars}</p>
+                </dd>
+            </dl>`;
+            }
+        }
+        box.innerHTML = str;
+    </script>
+</body>
+</html>

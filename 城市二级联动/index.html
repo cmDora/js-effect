@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;list-style:none;}
+        #wrap{width: 500px;margin:50px auto 0;}
+        #txt{width: 300px;height: 35px;}
+        #box{margin-top:10px;}
+        #box h3{line-height:30px;margin-bottom:10px;}
+        #hotcity li{float: left;padding:3px 8px;background:skyblue;margin:5px;line-height:30px;color:#fff;}
+        #hotcity{height: 60px;border-bottom:1px solid #ccc;}
+        #province li{float: left;background:limegreen;margin:5px;padding:3px 8px;text-align:center;line-height:30px;color:#fff;}
+        #province{height: 300px;}
+        #city{position:absolute;width: 400px;text-align:left;background:#fff;}
+        #city span{padding:5px;color:#000;}
+        #del{color:#fff;border:0;background:#f88;margin: 5px;text-align:center;line-height:30px;padding:3px 12px;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <input type="text" id="txt">
+        <div id="box"></div>
+    </div>
+
+    <script>
+        function City(){
+            this.init();
+            this.getFocus();
+            // this.blur();
+        }
+        City.prototype = {
+            constructor:City,
+            init:function(){
+                this.txt = document.getElementById('txt');
+                this.box = document.getElementById('box');
+            },
+            getFocus:function(){
+                var that = this;
+                this.txt.onfocus = function(){
+                    that.txt.value='';
+                    that.box.style.display = 'block';
+                    var str='<h3>热门城市</h3><ul id="hotcity">';
+                    for(var i in cityData.hot){
+                        str+='<li>'+cityData.hot[i].name+'</li>'
+                    }
+                    str+='</ul>';
+                    var str1 = '<h3>选择省份</h3><ul id="province">'
+                    for(var i in cityData.province){
+                        str1+='<li>'+cityData.province[i].name+'</li>'
+                    }
+                    str1+='<button id="del">清空</button></ul>';
+
+                    that.box.innerHTML = str+str1;
+                    that.overHot();
+                    that.overS();
+                }
+            },
+            overHot:function(){
+                var hotcity = document.getElementById('hotcity');
+                var hots = hotcity.getElementsByTagName('li');
+                var that = this;
+                for(var i=0;i<hots.length;i++){
+                    hots[i].onclick = function(){
+                        that.txt.value = this.innerHTML;
+                        that.box.style.display = 'none';
+                    }
+                }
+            },
+            overS:function(){
+                var that = this;
+                var province = document.getElementById('province');
+                var citys = province.getElementsByTagName('li');
+                for(var i=0;i<citys.length;i++){
+                    citys[i].index = i;
+                    citys[i].onclick = function(){
+                        var str2 ='';
+                        var city = document.getElementById('city');
+                        if(city){
+                            before.removeChild(city);
+                        }
+                        var newCity = document.createElement('p');
+                        newCity.id = 'city';
+                        for(var j in cityData.province[this.index].city){
+                            str2+='<span>'+cityData.province[this.index].city[j].name+'</span>'
+                        }
+                        newCity.innerHTML = str2;
+                        citys[this.index].appendChild(newCity);
+
+                        var spans = newCity.getElementsByTagName('span');
+                        for(var i=0;i<spans.length;i++){
+                            spans[i].onclick = function(){
+                                that.txt.value = this.innerHTML;
+                                that.box.style.display = 'none';
+                            }
+                        }
+                        window.before=this;
+                    }
+                }
+            },
+            blur:function(){
+                var that = this;
+                this.txt.onblur = function(){
+                    that.box.innerHTML = '';
+                }
+            }
+        }
+        new City();
+    </script>
+    <script src="cityData.js"></script>
+</body>
+</html>

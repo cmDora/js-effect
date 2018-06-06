@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		#wrap{
+			width: 960px;
+			margin: 30px auto;
+			border: 1px solid #ccc;
+			padding-bottom: 80px;
+			position: relative;
+		}
+		#header{
+			height: 40px;
+			line-height: 40px;
+			background: #f3f6fc;
+			border-bottom: 1px solid #ccc;
+		}
+		.dv1{
+			height: 60px;
+			line-height: 60px;
+			margin: 0 10px;
+			padding-left: 20px;
+			border-bottom: 1px dashed #ccc;
+		}
+		#box{
+			margin: 0 10px;
+		}
+		.dv2{
+			height: 50px;
+			line-height: 50px;
+			border-bottom: 1px dashed #ccc;
+			padding: 0 20px;
+		}
+		a{
+			text-decoration: none;
+			margin-left: 20px;
+		}
+		#remove{
+			cursor: pointer;
+		}
+		#btn{
+			position: absolute;
+			bottom: 0;
+			left: 43%;
+			padding: 5px 10px;
+			background: #fafbfd;
+			border: 1px solid #ccc;
+			border-bottom: none;
+			cursor: pointer;
+		}
+		.current{
+			background: blue;
+			color: #fff;
+		}
+		.color{
+			display: inline-block;
+			padding: 0 10px;
+			color: orange;
+			border: 1px solid orange;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<span id="choose">已选条件：</span>
+			<span id="remove">　|　清除全部</span>
+		</div>
+		<div class="dv1">
+			级别：
+			<span class="all">全部</span>
+			<a href="#" id="a0" index="0">微型车</a>
+			<a href="#" id="a1" index="0">小型车</a>
+			<a href="#" id="a2" index="0">紧凑型车</a>
+			<a href="#" id="a3" index="0">中型车</a>
+			<a href="#" id="a4" index="0">中大型车</a>
+			<a href="#" id="a5" index="0">跑车</a>
+			<a href="#" id="a6" index="0">大型车</a>
+		</div>
+		<div id="box">
+			<div class="dv2">
+				价格：
+				<span class="all">全部</span>
+				<a href="#" id="b0" index="1">10万以下</a>
+				<a href="#" id="b1" index="1">10-20万</a>
+				<a href="#" id="b2" index="1">20-50万</a>
+				<a href="#" id="b3" index="1">50万以上</a>
+			</div>
+			<div class="dv2">
+				排量：
+				<span class="all">全部</span>
+				<a href="#" id="c0" index="2">1.0L及以下</a>
+				<a href="#" id="c1" index="2">1.0-2.0</a>
+				<a href="#" id="c2" index="2">2.0-3.0</a>
+				<a href="#" id="c3" index="2">3.0-4.0</a>
+			</div>
+			<div class="dv2">
+				燃料：
+				<span class="all">全部</span>
+				<a href="#" id="d0" index="3">汽油</a>
+				<a href="#" id="d1" index="3">柴油</a>
+				<a href="#" id="d2" index="3">电动</a>
+				<a href="#" id="d3" index="3">油电混合</a>
+			</div>
+			<div class="dv2">
+				燃料：
+				<span class="all">全部</span>
+				<a href="#" id="e0" index="4">汽油</a>
+				<a href="#" id="e1" index="4">柴油</a>
+				<a href="#" id="e2" index="4">电动</a>
+				<a href="#" id="e3" index="4">油电混合</a>
+			</div>
+			<div class="dv2">
+				国别：
+				<span class="all">全部</span>
+				<a href="#" id="f0" index="5">中国</a>
+				<a href="#" id="f1" index="5">美国</a>
+				<a href="#" id="f2" index="5">德国</a>
+				<a href="#" id="f3" index="5">日本</a>
+			</div>
+			<div class="dv2">
+				座位：
+				<span class="all">全部</span>
+				<a href="#" id="g0" index="6">5座</a>
+				<a href="#" id="g1" index="6">7座</a>
+			</div>
+		</div>
+		<span id="btn">点击收起</span>
+	</div>
+	<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body> 
+	<h1>留言</h1>
+	<input type="text" id="txt">
+	<input type="button" value="留言" id="btn">
+	<script>
+		var txt = document.getElementById("txt"),
+			btn = document.getElementById("btn");//获取两个标签
+
+		var oUl = document.createElement("ul");//创建一个ul
+		document.body.appendChild(oUl);//添加节点
+
+		btn.onclick = function(){//点击留言按钮
+			
+			var oLi = document.createElement("li");//创建一个li
+			oLi.innerHTML = txt.value;//把文本框里的内容写入li标签中
+			oUl.appendChild(oLi);//添加节点
+
+			var oA = document.createElement("a");//创建一个a
+			oA.setAttribute("href","javascript:;");
+			oA.innerHTML = "删除";
+			oLi.appendChild(oA);//添加节点
+
+			var a = document.getElementsByTagName("a");//获取a标签
+			for(var i=0; i<a.length; i++){
+				a[i].onclick = function(){//点击任意一个a标签
+					this.parentNode.parentNode.removeChild(this.parentNode);//删除节点
+				}
+			}
+			txt.value = "";//文本框为空
+		}
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

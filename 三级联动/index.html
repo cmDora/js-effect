@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	
+	<select name="" id="pro"></select>
+	
+	<select name="" id="city"></select>
+	
+	<select name="" id="county"></select>
+	
+	<script>
+	
+	var arr = [
+		
+		"北京",[
+			"海淀",["上地","西二旗","西三旗"],
+			"朝阳",["三里屯","高井","花家地"]
+		],
+		
+		"河北",[
+			"张家口",["下花园","东花园","上花园"],
+			"石家庄",["空中花园","新华区","桥西"]
+		],
+		
+		"山东",[
+			"烟台",["路平","枣","苹果"],
+			"德州",["庆云县","德县","曹县"]
+		]
+		
+	];
+	
+	var pro = document.getElementById("pro"),
+		city = document.getElementById("city"),
+		county = document.getElementById("county");
+	
+	for(var i=0;i<arr.length;i++){
+		
+		if(typeof arr[i]=="string"){
+
+			/*var op = document.createElement("option");
+			op.innerHTML = arr[i];
+			pro.appendChild(op);*/
+			
+			pro.add(  new Option(arr[i],arr[i]) );
+			
+		}
+		
+	}
+	
+	
+	
+	pro.onchange = function(){
+		
+		for(var i=0;i<arr.length;i++){
+			
+			if( !(arr[i] instanceof Array)  ){
+				
+				if(  pro.value ==arr[i]     ){
+					
+					var proData =  arr[i+1];
+					
+					//city.innerHTML = "";
+					city.options.length = 0;
+				
+					for(var j=0;j<proData.length;j++){
+					
+						if(typeof proData[j]=="string"){
+						
+							city.add(  new Option(proData[j],proData[j])   );
+							
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
+	city.onchange = function(){
+		
+		
+		for(var i=0;i<arr.length;i++){
+			
+			if(typeof arr[i]=="object"){
+				
+				var cityData = arr[i];
+				
+				for(var j=0;j<cityData.length;j++){
+					
+					if(city.value ==cityData[j]){
+						
+						var countyData = cityData[j+1];
+						
+						county.options.length = 0;
+						
+						for(var k=0;k<countyData.length;k++){
+							
+							county.add( new Option(countyData[k],countyData[k])   );
+							
+						}
+					}
+					
+					
+				}
+				
+			}
+			
+		}
+		
+		
+		
+	}
+	
+	
+	</script>
+	
+	
+	</body>
+</html>

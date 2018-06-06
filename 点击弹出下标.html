@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <!-- 定义一串数 -->
+    <ul id="ul1">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+
+    <script>
+        //声明并调用上面的结构
+        var ul1 = document.getElementById("ul1"),
+            lis = document.getElementsByTagName("li");
+
+        //上面的li有多少循环多少次
+        for(var i = 0;i < lis.length;i++){
+            lis[i].index = i;//循环到数值位置时提取下标位置
+            lis[i].onclick = function(){
+                alert(this.index);//点击数值时将下标位置弹出
+            }
+        }
+        
+        for(let i = 0; i < lis.length; i++){
+        	lis[i].onclick = function(){
+        		alert(i);
+        	}
+        }
+    </script>
+</body>
+</html>

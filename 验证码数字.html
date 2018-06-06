@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 点击按钮随机获取 1-33 中的5个数字，要求排序并去重。并写入文本框。点击一
+
+    次获取一次 -->
+
+    <form action = "javascript:void(0);">
+        <input type="text" name="">
+        <button id="btn">获取数字</button>
+    </form>
+
+    <script>
+        var ipt = document.getElementsByTagName("input"),
+            btn = document.getElementById("btn");
+        function randomNum(min,max){
+                return Math.floor(Math.random()*(max-min+1)+min);
+        }
+
+
+        btn.onclick = function(){
+            var str = [];
+
+            for(var i=0;i<5;i++){
+                var num = randomNum(1,33);
+                if(str.indexOf(num) == -1){
+                    str.push(num)
+                }else{
+                    i--;
+                }
+            }
+            str.sort(function(a,b){
+                return a - b;//升序
+            })
+        //console.log(str);
+            var arr = str.join(" ");
+            ipt[0].value = arr;
+        }
+    </script>
+
+   <!--  <script>
+       var ipt = document.getElementsByTagName("input"),
+           btn = document.getElementById("btn");
+       function fn(min,max){
+           return Math.floor(Math.random() * (max-min+1) + min);
+       }
+       var num = fn(1,33);
+       console.log(arr);
+       var arr = [];
+       while(arr.length<5){
+           if(arr.indexOf(num) == -1){
+               arr.push(num);
+           }else{
+               arr.length--;
+           }
+       }
+   </script> -->
+</body>
+</html>

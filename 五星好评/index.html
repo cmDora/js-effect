@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        img{
+            width:30px;
+            height:30px;
+        }
+    </style>
+</head>
+<body>
+    <img src="img/1.gif" alt="">
+    <img src="img/1.gif" alt="">
+    <img src="img/1.gif" alt="">
+    <img src="img/1.gif" alt="">
+    <img src="img/1.gif" alt="">
+    <img src="img/1.gif" alt="">
+    <script>
+        var imgs = document.getElementsByTagName("img");
+
+        for(let i = 0;i < imgs.length;i++){
+            imgs[i].onclick = function(){
+                for(var count = 0;count < imgs.length;count++){
+                    if(count <= i) imgs[count].src = "img/2.gif";
+                    else imgs[count].src = "img/1.gif";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

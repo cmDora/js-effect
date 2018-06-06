@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <!-- 可能会遇到的Bug -->
+    <!-- 当你用点击开始按钮时，定时器执行，然后页面开始随机获取颜色，但当你再次点击按钮时定时器便又会执行一次，也就是说定时器再不断的被打开，到最后变叠加了好多定时器，同时，效果也会被叠加，速度会变得越来越快 -->
+    <!-- 解决方法 -->
+    <!--
+        1、用button按钮做，则只需在点击开始按钮时执行，并将开始按钮禁用。而点击停止按钮时则将定时器清空并重新赋值定时器为空，而开始按钮解除禁用
+        2、用第一种方法局限性太大，因为按钮禁用只能在按钮中运作。而该方法则通用，便是点击开始按钮时，判断点击是否起效，起效则定时器便不为空并开始执行，点击停止按钮时，清空定时器，并重新使定时器赋值为空，一切重新开始
+    -->
+
+    <button>开始</button>
+    <button>停止</button>
+    <script>
+        //获取节点
+        var btns = document.getElementsByTagName("button");
+
+        //DOM0级事件处理程序
+        //声明一个空变量，用于定时器最初的值
+        var timer = null;
+        //点击开始按钮
+        btns[0].onclick = function(){
+            //判断点击是否起效，起效则定时器便不为空并开始执行
+            if( !timer ) timer = setInterval(randomColor,200);
+        }
+
+        //声明一个函数，进行十六进制随机取颜色
+        function randomColor(){
+            //声明字符串，要考虑到，颜色十六进制中最小的是#000000，最大的是#FFFFFF，要控制范围在这中间
+            var str = "0123456789ABCDEF";
+            //声明一个空变量，空变量中用来放遍历字符串后的随机取出的十六进制颜色
+            var newStr = "";
+
+            //遍历字符串
+            for(var i = 0;i < 6;i++){
+                var index = Math.floor(Math.random() * str.length);//随机获取下标
+                //将遍历的六个字符累加在一起
+                newStr += str[index];
+            }
+
+            //将十六进制获取的颜色用在身体上(E6方法)
+            document.body.style.backgroundColor = `#${newStr}`;
+        }
+
+        //点击停止按钮
+        btns[1].onclick = function(){
+            //清除定时器
+            clearInterval(timer);
+            //清除定时器后为定时器重新赋值为空，让定时器重新执行一遍
+            timer = null;
+        }
+    </script>
+</body>
+</html>

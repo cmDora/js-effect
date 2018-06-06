@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>距离梦想还有：</h1>
+        <h2 id="hI"></h2>
+    </div>
+    <script>
+        setInterval(timer,1000);
+        function timer(){
+            var hI = document.getElementById("hI");
+
+            var now = +new Date();//获取当前时间戳
+
+            var now1 = +new Date(2017,4,4);//设置是时间戳
+
+            var time = now1 - now;//获取差值(为总倒计时)
+
+            var date = Math.floor(time/1000/60/60/24);
+                hours = Math.floor(time/1000/60/60%24);
+                minutes = Math.floor(time/1000/60%60);
+                seconds = Math.floor(time/1000%60);
+                milliseconds = Math.floor(time%1000);
+
+            var times = addzero(date) + "天" + addzero(hours) + "小时" + addzero(minutes) + "分钟" + addzero(seconds) + "秒" + milliseconds + "毫秒";
+
+            hI.innerHTML = times;
+
+            function addzero(i){
+                return i < 10? "0" + i:i;
+            }
+
+        }
+    </script>
+</body>
+</html>

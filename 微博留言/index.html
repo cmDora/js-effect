@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="box">
+		<div class="dv1">
+			<p class="txt">来，说说你在做什么，想什么</p>
+			<input type="text" id="ipt">
+			<div id="top">
+				<img src="imgs/11.jpg" alt="">
+				<img src="imgs/22.jpg" alt="">
+				<img src="imgs/33.jpg" alt="">
+				<img src="imgs/44.jpg" alt="">
+				<img src="imgs/55.jpg" alt="">
+				<img src="imgs/66.jpg" alt="">
+				<img src="imgs/77.jpg" alt="">  
+				<img src="imgs/88.jpg" alt="">
+			</div>
+			<div class="ban">
+				<textarea name="" id="info" cols="30" rows="10" maxlength="140"></textarea>
+				<div id="tit"><span id="pic">还能输入<b id="ds">140</b>个字</span><button id="btn">广播</button></div>
+			</div>
+
+			<div class="nav">
+				<b class="abc">大家在说</b>
+				<div id="wrap">
+					<!--<dl>
+					 		<dt><img src="imgs/11.jpg" alt=""></dt>
+	 						<dd>
+	 							<p><b>永不上线：</b>就覅额接近及偶尔交首付款的沉默中开发</p>
+	 							<i>04月13日 20:28</i>
+	 						</dd>
+	 						<u>删除</u>
+	 					</dl> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		var ipt = document.getElementById("ipt"),
+			imgs = document.getElementById("top").getElementsByTagName("img"),
+			info = document.getElementById("info"),
+			ds = document.getElementById("ds");
+			
+
+		var src = "imgs/11.jpg";
+		for(var i=0; i<imgs.length; i++){
+			imgs[i].onclick = function(){
+				for(var i=0; i<imgs.length; i++){
+					imgs[i].style.opacity = '';
+				}
+				this.style.opacity = 1;
+				src = this.src;
+			}
+		}
+		
+
+		btn.onclick = function(){
+			
+			var txts = ipt.value,
+				texs = info.value;
+			
+			if(txts=="" || texs==""){
+				alert("您还没有输入昵称或留言");
+			}else{
+
+				var newdl = document.createElement("dl");
+					newdl.innerHTML = `<dt><img src=${src} alt=""></dt><dd><p><b>${txts}：</b>${texs}</p><i>${getTime()}</i></dd><u>删除</u>`;
+
+				wrap.insertBefore(newdl,wrap.getElementsByTagName("dl")[0]);
+
+				
+
+				var del = document.getElementsByTagName("u")[0];
+				newdl.onmouseover = function(){
+					this.style.background = "#ccc";
+					del.style.display = "block";
+				}
+				newdl.onmouseout = function(){
+					this.style.background = "";
+					del.style.display = "";
+				}
+
+
+				del.onclick = function(){
+					//this.parentNode.parentNode.removeChild(this.parentNode);
+					wrap.removeChild(newdl);
+				}
+
+			}
+		}
+
+
+
+
+
+		info.onkeyup = function(){
+			if(info.value.length<=140){
+				ds.innerHTML = 140-info.value.length;
+			}
+		}
+
+		function getTime(){
+			var time = new Date(),
+				oMonth = time.getMonth()+1,
+				oDate = time.getDate(),
+				oHours = time.getHours(),
+				oMinutes = time.getMinutes();
+			return newStr = addZero(oMonth) + "月" + addZero(oDate) + "日" + " " + addZero(oHours) + ":" + addZero(oMinutes);
+		}
+		function addZero(i){
+			return i<10?"0"+i:i;
+		}
+
+	</script>
+</body>
+</html>

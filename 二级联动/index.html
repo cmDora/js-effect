@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <span>区域：</span><select id="area"></select><span>街道：</span><select id="street"></select><span>品牌：</span><select id="pai"></select><span>型号：</span><select id="hao"></select>
+    <script src='data.js'></script>
+    <script src='script.js'></script>
+    <script>
+        function P1(){
+
+        }
+        P1.prototype = new LianDong(datasrc,'area','street')
+        function P2(){
+            this.addArea = function(){
+                this.area.innerHTML = ''
+                for(var k in this.obj){
+                    if(k=='ObjectType'){
+                        var arr = this.obj[k].option;
+                        for(var i=0;i<arr.length;i++){
+                            this.area.add(new Option(arr[i].text));
+                        }
+                    }
+                }
+            }
+            this.addStreet = function(){
+                var that = this;
+                this.area.onchange = function(){
+                    that.index = this.selectedIndex;
+                    that.street.innerHTML = '';
+                    for(i=0;i<that.obj['ObjectType'].option[that.index].option.length;i++){
+                        that.street.add(new Option(that.obj['ObjectType'].option[that.index].option[i].text))
+                    }
+                }
+        }
+        this.addArea();
+        this.addStreet();
+    }
+        P2.prototype = new LianDong(datasrc,'pai','hao');
+        var p3 = new P2();
+
+        // console.log(p3)
+        /*P2.prototype.addArea = function(){
+
+        }
+        P2.prototype.addArea = function(){
+            for(var k in this.obj){
+                if(k=='ObjectType'){
+                    var arr = this.obj[k].option;
+                    for(var i=0;i<arr.length;i++){
+                        this.area.add(new Option(arr[i].text));
+                    }
+                }
+            }
+        }*/
+
+
+
+        /*P2.prototype.addArea =
+        }*/
+
+    </script>
+</body>
+</html>

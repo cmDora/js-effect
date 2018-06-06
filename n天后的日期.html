@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //方法一：
+        /*function nDay(n){
+            var n = n? n:0;
+            var now = new Date();//获取当前时间
+                now.setDate(now.getDate() + n);//1970年 ~ n天之间的所有时间戳
+
+            var nYear = now.getFullYear(),//获取n天后的年
+                nMonths = now.getMonth()+1,//获取n天后的月
+                nDate = now.getDate();//获取n天后的天数
+
+            var timer = nYear + "年" + nMonths + "月" + nDate + "日";
+
+            return timer;
+        }
+        console.log(nDay(5));*/
+
+        //方法二：
+        /*function nDay(n){
+            var n = n? n:0;
+
+            var now = +new Date();//获取当前时间戳
+            //var nnow = new Date(now + n * 24 * 60 * 60 *1000);//获取n天后的时间戳
+            var nnow = new Date();
+                nnow.setTime(now + n*24*60*60*1000);
+
+            var nYear = nnow.getFullYear(),
+                nMonths = nnow.getMonth()+1,
+                nDate = nnow.getDate();
+
+            var time = nYear + "年" + addzero(nMonths) + "月" + addzero(nDate) + "日";
+
+            function addzero(i){
+                return i < 10? "0" + i:i;
+            }
+
+            return time;
+        }
+        console.log(nDay(5));*/
+
+        //方法三：
+        function nDay(n){
+            var n = n? n:0;
+
+            var now = new Date(),
+                oYear = now.getFullYear(),
+                oMonths = now.getMonth(),
+                oDate = now.getDate();
+
+            var nnow = new Date(oYear,oMonths,oDate + n),
+                nYear = nnow.getFullYear(),
+                nMonths = nnow.getMonth()+1,
+                nDate = nnow.getDate();
+
+            var time = nYear + "年" + nMonths + "月" + nDate + "日";
+
+            return time;
+
+            function addzero(i){
+                return i < 10? "0"+i:i;
+            }
+
+        }
+        console.log(nDay(5));
+    </script>
+</body>
+</html>

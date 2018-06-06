@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <form action="javascript:void(0);">
+        <input type="text" placeholder="数值一">
+        <input type="radio" name="rad">+
+        <input type="radio" name="rad">-
+        <input type="radio" name="rad">*
+        <input type="radio" name="rad">/
+        <input type="radio" name="rad">%
+        <input type="text" placeholder="数值二">
+        <button>计算</button>
+        <button>重置</button>
+        <input type="text" placeholder="结果">
+    </form>
+
+    <script>
+        var ipts = document.getElementsByTagName("input"),
+            btns = document.getElementsByTagName("button");
+
+        //点击计算按钮
+        btns[0].onclick = function(){
+            var ipt1 = +ipts[0].value,
+                ipt2 = +ipts[6].value;
+            switch(true){
+                case ipts[1].checked:
+                    ipts[7].value = ipt1 + ipt2;
+                    break;
+                case ipts[2].checked:
+                    ipts[7].value = ipt1 - ipt2;
+                    break;
+                case ipts[3].checked:
+                    ipts[7].value = ipt1 * ipt2;
+                    break;
+                case ipts[4].checked:
+                    ipts[7].value = ipt1 / ipt2;
+                    break;
+                case ipts[5].checked:
+                    ipts[7].value = ipt1 % ipt2;
+                    break;
+            }
+        }
+        btns[1].onclick = function(){
+                ipts[0].value = "",
+                ipts[6].value = "";
+                ipts[7].value = "";
+        /*for(var i = 1; i < 6; i++){
+            ipts[i].checked = false;
+        }*/
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+	*{margin:0;padding:0}
+	ul{
+		list-style: none;
+	}
+	#box{
+		width:970px;
+		height:270px;
+		margin: 180px auto;
+		border:1px solid #ccc;
+		overflow: hidden;
+		position: relative;
+	}
+	.pic{
+		width:970px;
+		height:270px;
+		position: relative;
+	}
+	.pic ul li{
+		width: 0px;
+		height: 0px;
+		position: absolute;
+		top: 135px;
+		left: 485px;
+		background:#000;
+	}
+	.pic ul li img{
+		width: 100%;
+		height: 100%;
+		opacity: 0.5;
+	}
+	
+	.pic ul li.l1 img{
+		opacity: 1;
+	}
+	.pic ul li.l1{
+		width: 640px; 
+		height: 270px;
+		z-index: 10;
+		left: 165px;
+		top: 0px;
+	}
+
+	.pic ul li.l2{
+		width: 530px; 
+		height: 224px;
+		z-index: 9;
+		left: 460px;
+		top: 23px;
+	}
+.pic ul li.l3
+{
+	z-index: 8;
+	width: 530px; 
+	height: 100px;
+	right: 0px;top: 85px;
+}
+
+
+
+.pic ul li.l9
+{
+	z-index: 8;
+	width: 530px; 
+	height: 100px;
+	left: 1px;top: 85px;
+}
+	.pic ul li.l10
+	{
+		width: 530px; 
+		height: 224px;
+		z-index: 9;
+		left: 0px;top: 23px;
+	}
+	#btn1{
+	width: 35px;
+	height: 45px;
+	color: #fff;
+	cursor: pointer;
+	line-height: 45px;
+	text-align: center;
+	position: absolute;
+	left: 10px;top: 112px;
+	font-weight: bold;
+	font-size: 35px;
+	z-index: 100;
+}
+
+#btn2{
+	width: 35px;
+	height: 45px;
+	color: #fff;
+	cursor: pointer;
+	line-height: 45px;
+	text-align: center;
+	position: absolute;
+	right: 10px;top: 112px;
+	font-weight: bold;
+	font-size: 35px;
+	z-index: 100;
+}
+	</style>
+	<body>
+	<div id="box">
+		<div class="pic">
+			<ul>
+				<li class="l1"><img src="pic/01.jpg"/></li>
+				<li class="l2"><img src="pic/02.jpg"/></li>
+				<li class="l3"><img src="pic/03.jpg"/></li>
+				<li><img src="pic/04.jpg"/></li>
+				<li><img src="pic/05.jpg"/></li>
+				<li><img src="pic/06.jpg"/></li>
+				<li><img src="pic/07.jpg"/></li>
+				<li><img src="pic/08.jpg"/></li>
+				<li class="l9"><img src="pic/09.jpg"/></li>
+				<li class="l10"><img src="pic/10.jpg"/></li>
+			</ul>
+		</div>
+		<div class="btn">
+			<div id="btn1"> < </div>
+			<div id="btn2"> > </div>
+		</div>
+	</div>
+	
+	<script src="animate.js"></script>
+	<script>
+	var btn = document.querySelectorAll(".btn div");
+	var dates = new Date();
+	for(var i=0;i<btn.length;i++){
+		btn[i].index = i;
+		btn[i].onclick = function(){
+			
+			if( new Date()-dates>1000  ){	
+				fn(this.index);
+				dates=new Date();
+			}
+		}
+	}
+	
+	function fn(idx){
+		
+		
+		var lis = document.getElementsByTagName("li");
+		var arrW = [],arrH=[],arrL=[],arrT=[],arrO=[],arrZ=[];
+		for(var i=0;i<lis.length;i++){
+			
+			arrW.push(	parseInt(getAttr(lis[i],"width"))	);
+			arrH.push(	parseInt(getAttr(lis[i],"height"))	);
+			arrL.push(	parseInt(getAttr(lis[i],"left"))	);
+			arrT.push(	parseInt(getAttr(lis[i],"top"))	);
+			arrZ.push(	parseInt(getAttr(lis[i],"zIndex"))	);
+			arrO.push(	parseFloat(getAttr(lis[i].getElementsByTagName("img")[0],"opacity"))	);
+			
+		}
+		
+		console.log(arrO);
+		for(var i=0;i<lis.length;i++){
+			if(idx==1){
+				var index = i-1;
+				if(index<0){
+					index=9;
+				}
+				//右侧
+			}else{
+				var index = i+1;
+				if(index>lis.length-1){
+					index=0;
+				}
+				
+				//左侧
+				
+			}
+			
+			
+			animate(lis[i].getElementsByTagName("img")[0],{
+				
+				"opacity":arrO[index]*100
+							
+			});
+			
+			lis[i].style.zIndex = arrZ[index];
+			
+			animate(lis[i],{
+				
+				"width":arrW[index],
+				"height":arrH[index],
+				"left":arrL[index],
+				"top":arrT[index]
+				
+			})
+			
+		}
+		
+		
+			
+		
+		
+		/*	0			9
+			1			0
+			2			1
+			3			2
+			4			3
+			
+			
+		
+		lis[0].style.width=arrW[9]*/
+		
+		
+	
+	}
+	
+	function getAttr(dom,attr){
+		
+		if(dom.currentStyle){
+			return dom.currentStyle[attr];
+		}else{
+			return getComputedStyle(dom,null)[attr];
+		}
+		
+	}
+	
+		
+	</script>
+	</body>
+</html>
+
+
+<!--width  height left  top  z-index   opacity
+	
+	9-0-1-2-3-4-5-6-7-8
+	
+	
+	把9的值width  height left  top  z-index   opacity 
+	
+	赋值给0
+	
+	
+-->
+	
+	
+
+
+	
+	
+	

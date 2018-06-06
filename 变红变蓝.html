@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" style="background: blue;width:200px;height:200px;"></div>
+    <button id="btn" style="margin-top:15px;margin-left:75px;background:#fcf;">变红</button>
+    <script>
+        var box = document.getElementById("box"),
+            btn = document.getElementById("btn");
+        var flag = true;
+
+        btn.onclick = function(){
+            if(flag){
+                btn.innerHTML = "变蓝";
+                box.style.backgroundColor = "red";
+                flag = false;
+            }else{
+                btn.innerHTML = "变红";
+                box.style.backgroundColor = "blue";
+                flag = true;
+            }
+        }
+    </script>
+</body>
+</html>

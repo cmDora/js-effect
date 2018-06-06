@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        #d2 img{
+            display:none;
+        }
+        #d2>img:nth-child(1){
+            display:block;
+        }
+    </style>
+</head>
+<body>
+    <div id="d1">
+        <img src="img/m1.png" alt="">
+        <img src="img/m2.png" alt="">
+        <img src="img/m3.png" alt=""><br><br>
+        <img src="img/m4.png" alt="">
+        <img src="img/m5.png" alt="">
+        <img src="img/m6.png" alt="">
+    </div>
+    <div id="d2">
+        <img src="img/m1.jpg" alt="">
+        <img src="img/m2.jpg" alt="">
+        <img src="img/m3.jpg" alt="">
+        <img src="img/m4.jpg" alt="">
+        <img src="img/m5.jpg" alt="">
+        <img src="img/m6.jpg" alt="">
+    </div>
+    <script>
+        var imgs1 = document.getElementById("d1").getElementsByTagName("img"),
+            imgs2 = document.getElementById("d2").getElementsByTagName("img");
+
+        for(let i = 0;i < imgs1.length;i++){
+            imgs1[i].onmouseover = function(){
+                for(var j = 0;j < imgs2.length;j++){
+                    imgs2[j].style.display = "none";
+                }
+                imgs2[i].style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

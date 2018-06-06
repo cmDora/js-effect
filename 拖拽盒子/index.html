@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+	*{margin:0;padding:0}
+	#dv1{
+		width:300px;
+		height: 300px;
+		background:red;
+		position: relative;
+	}
+	#dv2{
+		width:100px;
+		height:100px;
+		background: blue;
+		position: absolute;
+		bottom: 0;
+		right:0;
+	}
+	</style>
+	<body>
+		
+	
+	<div id="dv1">
+		<div id="dv2"></div>
+	</div>
+	
+	
+	<script>
+	dv2.onmousedown = function(e){
+		
+		var x = e.clientX
+		var y = e.clientY;
+		var w = dv1.offsetWidth;
+		var h = dv1.offsetHeight;
+		
+		document.onmousemove = function(e){
+			
+			dv1.style.width = w+e.clientX-x+"px";
+			dv1.style.height = h+e.clientY-y+"px";
+		}
+	}
+	dv2.onmouseup = function(){
+		
+		document.onmousemove = null;
+			
+	}
+	
+	</script>
+	
+	</body>
+</html>

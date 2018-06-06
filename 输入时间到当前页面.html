@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1 id="hI"></h1>
+    </div>
+    <script>
+        setInterval(timer,1000);
+        function timer(){
+            var hI = document.getElementById("hI");
+            var now = new Date();
+            var day = now.getDay(),
+                months = now.getMonth(),
+                minutes = now.getMinutes(),
+                year = now.getFullYear(),
+                date = now.getDate(),
+                hours = now.getHours(),
+                seconds = now.getSeconds();
+
+            var timers = year + "年" + months + "月" + date + "天" + addzero(hours) + "小时" + addzero(minutes) + "分钟" + addzero(seconds) + "分钟";
+
+            hI.innerHTML = timers;
+
+            function addzero(i){
+                return i<10? "0"+i:i;
+            }
+        }
+    </script>
+</body>
+</html>

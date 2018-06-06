@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label>AD运动衣<span>350</span>元<input type="checkbox" name=""></label><br/><br/>
+        <label>NICK运动背包<span>220</span>元<input type="checkbox" name=""></label><br/><br/>
+        <label>乔丹运动鞋<span>480</span>元<input type="checkbox" name=""></label><br/><br/>
+        花费总计：<input type="text" name="" value="0" id="price">
+    </form>
+    <script>
+        //获取节点
+        var labs = document.getElementsByTagName("label"),
+            spns = document.getElementsByTagName("span"),
+            ipts = document.getElementsByTagName("input");
+
+        //遍历整个html结构并分别获取它们的准确位置
+        for(let i = 0;i < labs.length;i++){
+            ipts[i].onclick = function(){
+                var prices = +price.value;
+                if(ipts[i].checked){
+                    price.value = prices + Number(spns[i].innerHTML);
+                }else{
+                    price.value = prices - Number(spns[i].innerHTML);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

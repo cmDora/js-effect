@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        *{
+            text-align:center;
+        }
+        label{
+            margin-left:5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>问卷调查</h1>
+        <h2>你的爱好</h2>
+        <label><span>吃东西</span><input type="checkbox" name="" value=""></label>
+        <label><span>睡觉</span><input type="checkbox" name="" value=""></label>
+        <label><span>打游戏</span><input type="checkbox" name="" value=""></label>
+        <label><span>敲代码</span><input type="checkbox" name="" value=""></label>
+        <label><span>看美食</span><input type="checkbox" name="" value=""></label>
+        <label><span>运动</span><input type="checkbox" name="" value=""></label><br><br>
+        <button>全选</button><br><br>
+        <button>反选</button><br><br>
+        <button>不选</button><br><br>
+        <button>提交</button><br><br>
+    </div>
+    <script>
+        //获取节点
+        var labs = document.getElementsByTagName("label"),
+            ipts = document.getElementsByTagName("input"),
+            btn = document.getElementsByTagName("button"),
+            sps = document.getElementsByTagName("span");
+
+        //点击全选按钮
+        btn[0].onclick = function(){
+            for(var i = 0,len = ipts.length;i < len;i++){
+                ipts[i].checked = true;
+            }
+        }
+
+        btn[1].onclick = function(){
+            for(var i = 0,len = ipts.length;i < len;i++){
+                if(ipts[i].checked){
+                    ipts[i].checked = false;
+                }else{
+                    ipts[i].checked = true;
+                }
+            }
+        }
+
+        btn[2].onclick = function(){
+            for(var i = 0,len = ipts.length;i < len;i++){
+                ipts[i].checked = false;
+            }
+        }
+
+        /*btn[3].onclick = function(){
+                var flag = confirm("确认提交么？");
+                if(flag){
+                    fn();
+                }
+            }
+
+        function fn(){
+            var str = "",
+                num = 1;
+            for(var i = 0;i < ipts.length;i++){
+                if(ipts[i].checked){
+                    str += num++ + "、" + sps[i].innerHTML + "\n";
+                }else{
+                    document.write("您并没有选择");
+                    break;
+                }
+            }
+            var fla = confirm(str);
+            if(fla){
+                document.write("感谢您的参与！")
+            }
+        }*/
+
+        btn[3].onclick = function(){
+            var flag = confirm("确认提交吗？");
+            if(flag){
+                fn();
+            }
+        }
+
+        function fn(){
+            var str = "",
+                num = 1;
+            for(var i = 0;i < ipts.length;i++){
+                if(ipts[i].checked){
+                    str += num++ + "、" + sps[i].innerHTML + "\n";
+                }
+            }
+            var f = confirm(str);
+            if(f){
+                document.write("感谢您的参与!");
+            }
+        }
+    </script>
+</body>
+</html>

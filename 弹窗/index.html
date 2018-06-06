@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        button{padding:10px;}
+        input{height: 35px;}
+        #box{width: 500px;height: 500px;background:rgba(0,0,0,.1);position:relative;}
+        .current{position:absolute;right:0;font-size:26px;}
+    </style>
+</head>
+<body>
+    <button id="all">清除</button>
+    <br>
+    <input type='text' id="txt"><button id="send">发送</button>
+    <div id="box"></div>
+    <script>
+        var send = document.getElementById('send'),
+            txt = document.getElementById('txt'),
+            all = document.getElementById('all'),
+            box = document.getElementById('box'),
+            colors = ['a','b','c','d','e','f',1,2,3,4,5,6,7,8,9,0];
+
+
+        send.onclick = function(){
+            var str = txt.value;
+            var newSp = document.createElement('span');
+            newSp.innerHTML = str;
+            newSp.className = 'current';
+            newSp.style.cssText=`top:${getTop()}px;color:${getColor()}`;
+            box.appendChild(newSp);
+            var num = box.offsetWidth-26;
+            setInterval(function(){
+                if(num==0){
+                    box.removeChild(newSp);
+                }
+                newSp.style.left = num-- + 'px';
+            },getRandom())
+        }
+        all.onclick = function(){
+            box.innerHTML = '';
+        }
+        function getRandom(){
+            return Math.floor(Math.random()*60+35)
+        }
+        function getColor(){
+            var str1 = '#';
+            for(var i=0;i<3;i++){
+                str1 += colors[Math.floor(Math.random()*colors.length)];
+            }
+            return str1;
+        }
+        function getTop(){
+            var min = box.offsetTop-26;
+            var max = min+box.offsetHeight-26;
+            var cha = max - min;
+            return Math.floor(Math.random()*cha);
+        }
+        if(!('a' in window)){
+            var a= 10;
+        }
+        alert(a);
+    </script>
+</body>
+</html>

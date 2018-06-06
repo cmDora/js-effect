@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        #wrap{width: 300px;height: 500px;margin:50px auto;}
+        #username{width: 300px;height: 40px;}
+        #psw{width: 300px;height: 40px;}
+        #txt{width: 150px;height: 40px;float:left;}
+        #yan{display:block;width: 50px;height: 40px;line-height:40px;border:1px solid #ccc;float:left;margin:0 15px;text-align:center;}
+        button{width: 300px;height: 40px;background:orange;border:0;}
+        .hezi{width: 300px;height: 20px;line-height:20px;font-size:14px;opacity:0;}
+        .clear{width: 0;height: 0;clear: both;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <input type="text" id="username" placeholder="请输入用户名">
+        <div class="hezi">您输入的用户名和密码不匹配，请重新输入！</div>
+        <input type="password" id="psw" placeholder="请输入密码">
+        <div class="hezi">您输入的密码和用户名不匹配，请重新输入！</div>
+        <input type="text" id="txt"><span id="yan"></span><b>换一张</b>
+        <div class="clear"></div>
+        <div class="hezi">您输入的验证码有误</div>
+        <button>登录</button>
+    </div>
+    <script>
+        var users = [
+           {
+               username:'admin',
+               password:"zhangsan123"
+           },
+           {
+               username:"lyunb",
+               password:"123987li"
+           },
+           {
+               username:"zsf_qb",
+               password:"wang_wu55"
+           }
+       ]
+       function PiPei(){
+        this.init();
+        this.bindD();
+        this.bindB();
+       }
+       PiPei.prototype = {
+            constructor:PiPei,
+            init:function(){
+                this.username = document.getElementById('username');
+                this.psw = document.getElementById('psw');
+                this.txt = document.getElementById('txt');
+                this.yan = document.getElementById('yan');
+                this.hezi = document.getElementsByClassName('hezi');
+                this.btn = document.getElementsByTagName('button')[0];
+                this.b = document.getElementsByTagName('b')[0];
+                this.getYan();
+            },
+            bindD:function(){
+                var that = this;
+                this.btn.onclick = function(){
+                    that.user = that.username.value;
+                    that.pswtxt = that.psw.value;
+                    var reg1 = /^[a-z]\w{3,19}$/;
+                    var reg2 = /^\w{6,16}$/;
+                    if(!reg1.test(that.user)){
+                        that.hezi[0].style.opacity = '1';
+                    }
+                    if(!reg2.test(that.pswtxt)){
+                        that.hezi[1].style.opacity = '1';
+                    }
+                    that.userpwd();
+                    var str = that.yan.innerHTML;
+                    if(that.txt.value != str){
+                        that.hezi[2].style.opacity = '1';
+                    }else{
+                        that.hezi[2].style.opacity = '0';
+                    }
+                }
+            },
+            bindB:function(){
+                var that = this;
+                this.b.onclick = function(){
+                    that.getYan();
+                }
+            },
+            userpwd:function(){
+                for(var i=0;i<users.length;i++){
+                    if(users[i].username == this.user){
+                        if(users[i].password != this.pswtxt){
+                            this.hezi[1].style.opacity = '1';
+                            return ;
+                        }else{
+                            return ;
+                        }
+                    }
+                }
+                this.hezi[0].style.opacity = '1';
+                this.hezi[1].style.opacity = '1';
+            },
+            getYan:function(){
+                var arr = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                var str = '';
+                for(var i=0;i<4;i++){
+                    str += arr[Math.floor(Math.random()*26)];
+                }
+                this.yan.innerHTML = str;
+            }
+       }
+       new PiPei();
+    </script>
+</body>
+</html>

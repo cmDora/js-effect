@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        span{
+            width:30px;
+            height:30px;
+            border-radius:50%;
+            background:#cfc;
+            display:inline-block;
+            vertical-align:middle;
+            line-height:30px;
+            text-align:center;
+        }
+        span:nth-child(6),:nth-child(7){
+            background:red;
+        }
+        button{
+            background:#cfc;
+            margin-left:5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <button>开始</button>
+        <button>停止</button>
+    </div>
+    <script>
+        var spas = document.getElementsByTagName("span"),
+            btn = document.getElementsByTagName("button");
+
+        btn[0].onclick = function(){
+            btn[0].disabled = true;
+            timer = setInterval(time,200);
+        }
+
+        btn[1].onclick = function(){
+            btn[0].disabled = false;
+            clearInterval(timer);
+        }
+
+        var timer = null;
+
+        function fn(min,max){
+            return Math.floor(Math.random() * (max-min+1) + min);
+        }
+        function time(){
+            var arr = [];
+
+            while(arr.length<5){
+                var num = fn(1,33);
+                if(arr.indexOf(num) == -1){
+                    arr.push(num);
+                }else{
+                    i--;
+                }
+            }
+
+            arr.sort(function(a,b){
+                return a - b;
+            });
+
+            for(var i = 0;i < 2;i++){
+                var numm = fn(1,16);
+                arr.push(numm);
+            }
+
+
+            for(var i = 0;i < spas.length;i++){
+                spas[i].innerHTML = arr[i];
+            }
+        }
+    </script>
+</body>
+</html>

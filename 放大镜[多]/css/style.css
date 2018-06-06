@@ -1,0 +1,103 @@
+#wrap{
+	width:1200px;
+	height: 500px;
+	margin:20px auto;
+	border:1px solid #ccc;
+	padding:20px;
+}
+
+.main{
+	width:500px;
+	height: 500px;
+	border:1px solid #ccc;
+	float: left;
+	margin-right: 50px;
+}
+.pic{
+	width:500px;
+	height: 300px;
+	overflow: hidden;
+	position: relative;
+}
+
+.pic ul{
+	width:3000px;
+	height: 300px;
+}
+
+.pic ul li {
+	float: left;
+}
+
+.pic ul li img{
+	width:500px;
+	height:300px;
+}
+p{
+	width: 250px;
+	height: 150px;
+	background: #5441e6;
+	opacity: 0.4;
+	position: absolute;
+	left: 0px;
+	top:0px;
+}
+
+
+.small_pic{
+	width:500px;
+	height: 80px;
+	border:1px solid #ccc;
+	padding-top:30px;
+}
+
+.small_pic ul li{
+	float: left;
+	border:1px solid #ccc;
+	margin-left: 5px ;
+	margin-right: 5px;
+
+}
+.small_pic ul .lii{
+	border:1px solid #f00;
+}
+.small_pic ul li img{
+	width: 60px;
+	height: 40px;
+	padding:5px;
+}
+
+.big_pic{
+	float:left;
+	width:500px;
+	height:700px;
+
+}
+.big{
+	width:500px;
+	height: 300px;
+	overflow: hidden;
+}
+.big ol{
+	width:6000px; 
+	height: 300px;
+}
+
+
+.big ol li{
+	float: left;
+	width:1000px;
+	height: 600px;
+}
+.big ol li img{
+	width:1000px;
+	height: 600px;
+}
+
+.Big li{
+	position: relative;
+}
+
+.bigImg{
+	position: absolute;
+}

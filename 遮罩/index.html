@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        #mask{width:100%;height:100%;position:fixed;left:0;top:0;background:rgba(0,0,0,.5);}
+        #box{width: 500px;height: 400px;background:#fff;position:fixed;left:50%;top:50%;margin-top:-200px;margin-left:-250px;}
+        #box button{width:50%;height: 45px;text-align:center;line-height:45px;position:absolute;bottom:0;font-size:18px;}
+        #box button:nth-child(1){left:0;}
+        #box button:nth-child(2){right:0;}
+        #box h1{text-align:center;padding-top:10px;}
+    </style>
+</head>
+<body>
+    <div id="btn">遮罩</div>
+    <script>
+        function AlertBox(title,btn1,btn2){
+            this.title = title;
+            this.btn1 = btn1;
+            this.btn2 = btn2;
+            this.btn = document.getElementById('btn');
+            this.createBox();
+
+        }
+        AlertBox.prototype = {
+            constructor:AlertBox,
+            createZhe:function(){
+                    var oDiv = document.createElement('div');
+                    oDiv.id = 'mask';
+                    document.body.appendChild(oDiv);
+
+            },
+            createBox:function(){
+                var that = this;
+                this.btn.onclick = function(){
+                    that.createZhe();
+                    var oDiv = document.createElement('div');
+                    oDiv.id = 'box';
+                    document.body.appendChild(oDiv);
+                    oDiv.innerHTML = `<h1>${that.title}</h1><button>${that.btn1}</button><button>${that.btn2}</button>`;
+                    that.mask = document.getElementById('mask');
+                    that.box = document.getElementById('box');
+                    that.button = document.querySelectorAll('#box button');
+                    that.removeBox();
+                }
+
+            },
+            removeBox:function(){
+                var that = this;
+                for(var i=0;i<this.button.length;i++){
+                    this.button[i].onclick = function(){
+                        document.body.removeChild(that.mask);
+                        document.body.removeChild(that.box);
+                    }
+                }
+            }
+        }
+        new AlertBox('请您先登录','注册','登录');
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <img src="img/1.png" id="img" width="150" alt="">
+
+    <script>
+        //获取节点
+        var img = document.getElementById("img");
+
+        //点击图片改变图片的大小
+        img.onclick = function(){
+            //定义变量
+            var wid = img.width;
+            wid += 10;
+            wid > 300? wid = 150:wid;//三目运算符
+            img.width = wid;
+        }
+    </script>
+</body>
+</html>

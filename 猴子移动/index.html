@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        #box{
+            width:600px;
+            height:600px;
+            border:2px solid #0f0;
+        }
+        #img{
+            width:100px;
+            height:100px;
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img src="img/f1.jpg" alt="" id="img">
+    </div>
+    <script>
+        var img = document.getElementById("img");
+
+        document.onkeydown = function(event){
+
+            var e = event || window.event;
+
+            switch(e.keyCode){
+                case 37:
+                    img.style.left = Math.max(img.offsetLeft - 10,0) + "px";
+                    break;
+
+                case 38:
+                    img.style.top = Math.max(img.offsetTop - 10,0) + "px";
+                    break;
+
+                case 39:
+                    img.style.left = Math.min(img.offsetLeft + 10,500) + "px";
+
+                    break;
+
+                case 40:
+                    img.style.top = Math.min(img.offsetTop + 10,500) + "px";
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

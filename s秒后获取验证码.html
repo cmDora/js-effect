@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        input{
+            width:150px;
+            height:40px;
+            background:#cfc;
+            text-align:center;
+        }
+        button{
+            width:150px;
+            height:40px;
+            background:#cfc;
+        }
+    </style>
+</head>
+<body>
+    <input id="ipt" type="text" name=""><br><br>
+    <button id="btn">点击获取</button>
+    <script>
+        //获取节点
+        /*var ipt = document.getElementById("ipt"),
+            btn = document.getElementById("btn");*/
+
+        function $(id){
+            return document.getElementById(id);
+        }
+        var ipt = $("ipt"),
+            btn = $("btn");
+
+        var time = 5,
+            timer = null;
+        btn.onclick = function(){
+            if(!timer){
+                timer = setInterval(function(){
+                btn.innerHTML = time-- + "s秒后重试";
+
+                if(time < 0){
+                        clearInterval(timer);
+                        btn.innerHTML = "重新获取";
+                        time = 5;
+                        timer = null;
+                    }
+                },1000);
+
+                setTimeout(randomNum,2000);
+            }
+        }
+
+        function randomNum(){
+            var str = "abdfjdljfslf",
+                newStr = "";
+            for(var i = 0;i < 4;i++){
+                var index = Math.floor(Math.random() * str.length);
+                newStr += str[index];
+            }
+            ipt.value = newStr;
+        }
+    </script>
+</body>
+</html>

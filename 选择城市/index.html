@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        #box{width: 500px;height: auto;border:1px solid #000;margin:50px auto;}
+        #hot p{width: 100px;text-align:center;height: 40px;line-height:40px;float:left;}
+        #word p{width: 50px;text-align:center;height: 40px;line-height:40px;float:left;}
+        #more h3{margin-bottom:10px;}
+        #more p{height: 40px;text-indent:10px;border-bottom:1px solid #ccc;line-height:40px;}
+        h3{background:#ccc;line-height:40px;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h3>热门</h3>
+        <div id="hot">
+
+        </div>
+        <br style='clear: both;'>
+        <h3>更多</h3>
+        <div id="word">
+
+        </div>
+        <br style='clear: both;'>
+        <div id="more">
+
+        </div>
+    </div>
+
+    <script src="city.js"></script>
+    <script src="hotCity.json"></script>
+    <script>
+        function City(){
+            this.init();
+            this.hotTxt();
+            this.wordTxt();
+            this.moreTxt();
+        }
+        City.prototype = {
+            constructor:City,
+            init:function(){
+                this.hot = document.getElementById('hot');
+                this.word = document.getElementById('word');
+                this.more = document.getElementById('more');
+            },
+            hotTxt:function(){
+                var str = '';
+                for(var k in obj){
+                    str += `<p>${obj[k]}</p>`;
+                }
+                this.hot.innerHTML = str;
+            },
+            wordTxt:function(){
+                this.arr = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                for(var i=0;i<this.arr.length;i++){
+                    this.word.innerHTML += `<p>${this.arr[i]}</p>`;
+                }
+            },
+            moreTxt:function(){
+                var words = this.word.getElementsByTagName('p');
+                var that = this;
+                for(var i=0;i<words.length;i++){
+                    words[i].index = i;
+                    words[i].onclick = function(){
+                        more.innerHTML = `<h3>${that.arr[this.index]}</h3>`;
+                        for(var k in cities){
+                            if(cities[k][1].charAt(0) == that.arr[this.index]){
+                                more.innerHTML += `<p>${cities[k][0]}</p>`
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        new City();
+        /*var hot = document.getElementById('hot');
+        var word = document.getElementById('word');
+        var more = document.getElementById('more');
+        var str = '';
+        for(var k in obj){
+            str += `<p>${obj[k]}</p>`;
+        }
+        hot.innerHTML = str;
+        var arr = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        var newstr = '';
+        for(var i=0;i<arr.length;i++){
+            newstr += `<p>${arr[i]}</p>`;
+        }
+        word.innerHTML = newstr;
+        var words = word.getElementsByTagName('p');
+        for(var i=0;i<words.length;i++){
+            words[i].index = i;
+            words[i].onclick = function(){
+                more.innerHTML = `<h3>${arr[this.index]}</h3>`;
+                for(var k in cities){
+                    if(cities[k][1].charAt(0) == arr[this.index]){
+                        more.innerHTML += `<p>${cities[k][0]}</p>`
+                    }
+                }
+            }
+        }*/
+    </script>
+</body>
+</html>

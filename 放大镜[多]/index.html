@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/css.css">
+	<link rel="stylesheet" href="css/style.css">
+	
+</head>
+<body>
+	
+	<div id="wrap">
+		<div class="main">
+
+			<div class="pic" id="pcs">
+
+				<p class="glass"></p>
+				
+				<ul class="Pic">
+					<li><img src="img/1.jpg"></li>
+					<li><img src="img/2.jpg"></li>
+					<li><img src="img/3.jpg"></li>
+					<li><img src="img/4.jpg"></li>
+					<li><img src="img/5.jpg"></li>
+					<li><img src="img/6.jpg"></li>
+				</ul>
+			</div>
+
+
+
+			<div class="small_pic">
+				<ul class="small">
+					<li class="lii"><img src="img/1.jpg"></li>
+					<li><img src="img/2.jpg"></li>
+					<li><img src="img/3.jpg"></li>
+					<li><img src="img/4.jpg"></li>
+					<li><img src="img/5.jpg"></li>
+					<li><img src="img/6.jpg"></li>
+				</ul>
+			</div>
+
+
+
+		</div>
+		<div class="big_pic">
+			<div class="big">
+				<ol class="Big">
+					<li><img src="img/1.jpg" class="bigImg"></li>
+					<li><img src="img/2.jpg" class="bigImg"></li>
+					<li><img src="img/3.jpg" class="bigImg"></li>
+					<li><img src="img/4.jpg" class="bigImg"></li>
+					<li><img src="img/5.jpg" class="bigImg"></li>
+					<li><img src="img/6.jpg" class="bigImg"></li>
+				</ol>
+			</div>
+			
+		</div>
+	</div>
+	<script>
+		
+		var small_pic = getClass("small_pic")[0],
+			lis = small_pic.getElementsByTagName("li");
+
+
+
+
+		function getClass(cName){
+			var dom = document.getElementsByTagName("*");
+			var arr = [];
+			for(var i=0; i<arr.length; i++){
+				if(dom[i].className==cName){
+					arr.push(dom[i]);
+				}
+			}
+			return arr;
+		}
+
+
+	</script>
+</body>
+</html>
